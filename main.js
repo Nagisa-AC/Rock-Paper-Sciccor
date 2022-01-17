@@ -4,7 +4,7 @@ function computerPlay() {
     return gameChoices[Math.floor(Math.random() * gameChoices.length)]
 }
 
-/** Allow user to play round */
+// Allow user to play round 
 function playRound(playerSelection, computerSelection) {
     let modifiedPlayerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
     const gameChoices = ["Rock", "Paper", "Scissors"];
@@ -14,13 +14,31 @@ function playRound(playerSelection, computerSelection) {
             Rock, Paper, Scissors`
     }
 
-    
+    // Game rules
+    if (playerSelection == computerSelection) {
+        return `Tie! ${playerSelection} equals ${playerSelection}`
+    }
+    else if ((playerSelection == "Rock") && (computerSelection == "Scissor")) {
+        return `You Win! Rock beats Scissor`;
+    }
+    else if ((playerSelection == "Rock") && (computerSelection == "Paper")) {
+        return `You Lose! Paper beats Rock`;
+    }
+
+    else if ((playerSelection == "Paper") && (computerSelection == "Rock")) {
+        return `You Win! Paper beats Rock`;
+    }
+
+    else if ((playerSelection == "Paper") && (computerSelection == "Scissor")) {
+        return `You Lose! Scissor beats Paper`;
+    }
+
+    else if ((playerSelection == "Scissor") && (computerSelection == "Rock")) {
+        return `You Lose! Rock beats Scissor`;
+    }
+
+    else if ((playerSelection == "Scissor") && (computerSelection == "Paper")) {
+        return `You Win! Scissor beats Paper`;
+    }
 }
 
-
-// If user input != one of three choices, raise an error
-    // Make your function’s playerSelection parameter case-insensitive (so users can input rock, ROCK, RocK or any other variation).
-// Run conditional tests on RPS. For example --> (See below)
-    // Rock > Scissor
-    // Paper > Rock
-    // Scissor > Paper
