@@ -4,6 +4,7 @@ function computerPlay() {
     return gameChoices[Math.floor(Math.random() * gameChoices.length)]
 }
 
+
 // Allow user to play round 
 function playRound(playerSelection, computerSelection) {
     let modifiedPlayerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
@@ -15,30 +16,45 @@ function playRound(playerSelection, computerSelection) {
     }
 
     // Game rules
-    if (playerSelection == computerSelection) {
-        return `Tie! ${playerSelection} equals ${playerSelection}`
-    }
-    else if ((playerSelection == "Rock") && (computerSelection == "Scissor")) {
-        return `You Win! Rock beats Scissor`;
-    }
-    else if ((playerSelection == "Rock") && (computerSelection == "Paper")) {
-        return `You Lose! Paper beats Rock`;
+
+    if ((modifiedPlayerSelection == "Rock") && (computerSelection == "Rock")) {
+        return "Tie! Rock == Rock";
     }
 
-    else if ((playerSelection == "Paper") && (computerSelection == "Rock")) {
-        return `You Win! Paper beats Rock`;
+    else if ((modifiedPlayerSelection == "Rock") && (computerSelection == "Paper")) {
+        return "Defeat! Paper > Rock"
     }
 
-    else if ((playerSelection == "Paper") && (computerSelection == "Scissor")) {
-        return `You Lose! Scissor beats Paper`;
+    else if ( (modifiedPlayerSelection == "Rock") && (computerSelection == "Scissors") ) {
+        return "Victory! Rock > Scissors"
     }
 
-    else if ((playerSelection == "Scissor") && (computerSelection == "Rock")) {
-        return `You Lose! Rock beats Scissor`;
+    else if ( (modifiedPlayerSelection == "Paper") && (computerSelection == "Paper") ) {
+        return "Tie! Paper == Paper"
     }
 
-    else if ((playerSelection == "Scissor") && (computerSelection == "Paper")) {
-        return `You Win! Scissor beats Paper`;
+    else if ( (modifiedPlayerSelection == "Paper") && (computerSelection == "Rock") ) {
+        return "Victory! Paper > Rock"
+    }
+
+    else if ( (modifiedPlayerSelection == "Paper") && (computerSelection == "Scissors") ) {
+        return "Defeat! Paper < Scissors"
+    }
+
+    else if ( (modifiedPlayerSelection == "Scissors") && (computerSelection == "Scissors") ) {
+        return "Tie! Scissoros == Scissors"
+    }
+
+    else if ( (modifiedPlayerSelection == "Scissors") && (computerSelection == "Rock") ) {
+        return "Defeat! Scissors < Rock"
+    }
+
+    else if ( (modifiedPlayerSelection == "Scissors") && (computerSelection == "Paper") ) {
+        return "Victory! Scissors > Paper"
     }
 }
 
+
+// const playerSelection = "rock";
+// const computerSelection = computerPlay();
+// return playRound(playerSelection, computerSelection));
