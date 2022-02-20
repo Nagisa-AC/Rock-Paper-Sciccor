@@ -1,60 +1,64 @@
-// Allow computer to play
+"use strict";
+
 function computerPlay() {
-    const gameChoices = ["Rock", "Paper", "Scissors"];
-    return gameChoices[Math.floor(Math.random() * gameChoices.length)]
+	const computerChoices = ["Rock", "Paper", "Scissors"];
+	return computerChoices[Math.floor(Math.random() * 3)];
 }
 
+function round(playerSelection, computerSelection) {
+	// Keeping score of user and AI
+	let userScore = 0;
+	let computerScore = 0;
+	
+	// Unifying playerSelection to to be be in Title format
+	let modifiedPlayerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
 
-// Allow user to play round 
-function playRound(playerSelection, computerSelection) {
-    let modifiedPlayerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
-    const gameChoices = ["Rock", "Paper", "Scissors"];
-
-    if (!(gameChoices.includes(modifiedPlayerSelection))) {
+	// Edge cases
+	const gameChoices = ["Rock", "Paper", "Scissors"];
+	
+	if (!(gameChoices.includes(modifiedPlayerSelection))) {
         throw `Value not supported. Value must be one of  
-            Rock, Paper, Scissors`
+            Rock, Paper, Scissors`;
     }
 
-    // Game rules
+	// Game Rules
+	if (modifiedPlayerSelection == computerSelection) {
+		return `Tie! ${modifiedPlayerSelection} = ${computerSelection}`;
+	} else if (modifiedPlayerSelection == "Rock" && computerSelection == "Paper") {
+		computerScore++;
+		return `Defeat! Paper beats rock`
+	} else if (modifiedPlayerSelection == "Rock" && computerSelection == "Scissors") {
+		userScore++;
+		return `Victory! Rock beats Scissors`
+	} else if (modifiedPlayerSelection == "Paper" && computerSelection === "Rock") {
+		userScore++;
+		return `Victory! Paper beats Rock`;
+	} else if (modifiedPlayerSelection == "Paper" && computerSelection == "Scissors") {
+		computerScore++;
+		return `Defeat! Scissors beats paper`;
+	} else if (modifiedPlayerSelection == "Scissors" && computerSelection == "Rock") {
+		computerScore++;
+		return `Defeat! Rock beats Scissors`;
+	} else if (modifiedPlayerSelection == "Scissors" && computerSelection == "Paper") {
+		userScore++;
+		return `Victory! Scissors beats Paper`;
+	}
 
-    if ((modifiedPlayerSelection == "Rock") && (computerSelection == "Rock")) {
-        return "Tie! Rock == Rock";
-    }
-
-    else if ((modifiedPlayerSelection == "Rock") && (computerSelection == "Paper")) {
-        return "Defeat! Paper > Rock"
-    }
-
-    else if ( (modifiedPlayerSelection == "Rock") && (computerSelection == "Scissors") ) {
-        return "Victory! Rock > Scissors"
-    }
-
-    else if ( (modifiedPlayerSelection == "Paper") && (computerSelection == "Paper") ) {
-        return "Tie! Paper == Paper"
-    }
-
-    else if ( (modifiedPlayerSelection == "Paper") && (computerSelection == "Rock") ) {
-        return "Victory! Paper > Rock"
-    }
-
-    else if ( (modifiedPlayerSelection == "Paper") && (computerSelection == "Scissors") ) {
-        return "Defeat! Paper < Scissors"
-    }
-
-    else if ( (modifiedPlayerSelection == "Scissors") && (computerSelection == "Scissors") ) {
-        return "Tie! Scissoros == Scissors"
-    }
-
-    else if ( (modifiedPlayerSelection == "Scissors") && (computerSelection == "Rock") ) {
-        return "Defeat! Scissors < Rock"
-    }
-
-    else if ( (modifiedPlayerSelection == "Scissors") && (computerSelection == "Paper") ) {
-        return "Victory! Scissors > Paper"
-    }
+	// Show score after game
+	(userScore > computerScore) ? console.log(`Your score: ${userScore}`) : console.log(`AI Score: ${computerScore}`);
 }
 
+// Repeat game
+function Game() {
+	let rounds = 5;
+	for (let i=0; i<rounds; i++) {
+		let userPlay = prompt("What is your choice?");
+		let computerChoice = computerPlay();
+		console.log(
+			round(userPlay, computerChoice)
+		)
+	}
+	
+}
 
-// const playerSelection = "rock";
-// const computerSelection = computerPlay();
-// return playRound(playerSelection, computerSelection));
+Game();
